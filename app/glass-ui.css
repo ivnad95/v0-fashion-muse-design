@@ -1,0 +1,267 @@
+/* Glass UI Styles - Premium glassmorphism effects inspired by Fashion Muse Studio */
+
+:root {
+  --bg-color: #0a133b;
+  --light-color1: #002857;
+  --light-color2: #004b93;
+  --light-color3: #0a76af;
+  --silver-light: #f5f7fa;
+  --silver-mid: #c8cdd5;
+  --silver-dark: #8a92a0;
+  --silver-glow: rgba(200, 205, 213, 0.4);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --glass-blur: 24px;
+}
+
+/* Screen content optimized for mobile */
+.screen-content {
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: transparent;
+}
+
+.fixed-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scrollable-content {
+  padding: 0 24px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollable-content::-webkit-scrollbar {
+  display: none;
+}
+
+.screen-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Glass 3D effects */
+.glass-3d-surface {
+  position: relative;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.2), 0 8px 20px
+    var(--shadow-color);
+}
+
+.glass-3d-button {
+  position: relative;
+  cursor: pointer;
+  color: var(--silver-mid);
+  background: radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+  box-shadow: inset 0 2px 1px 0 rgba(255, 255, 255, 0.15), inset 0 -3px 2px 0 rgba(0, 0, 0, 0.5), 0 8px 15px
+    var(--shadow-color);
+  transition: all 0.1s ease-out;
+  border: none;
+}
+
+.glass-3d-button::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 80%;
+  height: 40%;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  border-radius: 50% / 100%;
+  transform: rotate(-10deg) skewX(-15deg);
+  filter: blur(2px);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.glass-3d-button:hover {
+  transform: translateY(-3px) scale(1.02);
+  color: var(--silver-light);
+  box-shadow: inset 0 2px 1px 0 rgba(255, 255, 255, 0.2), inset 0 -3px 2px 0 rgba(0, 0, 0, 0.5), 0 12px 25px
+    var(--shadow-color);
+}
+
+.glass-3d-button:active,
+.glass-3d-button.active {
+  transform: scale(0.96) translateY(2px);
+  color: var(--silver-light);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+  box-shadow: inset 0 5px 8px rgba(0, 0, 0, 0.7), inset 0 -1px 1px rgba(255, 255, 255, 0.2);
+  text-shadow: 0 0 12px var(--silver-glow);
+}
+
+.glass-3d-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: inset 0 2px 2px rgba(128, 128, 128, 0.2), inset 0 -2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.button-text {
+  font-weight: 600;
+  text-shadow: 0 1px 2px var(--shadow-color);
+}
+
+/* Number chips for count selector */
+.number-chip {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-chip.active {
+  background: linear-gradient(135deg, var(--silver-dark), var(--silver-light));
+  text-shadow: none;
+}
+
+.number-chip.active .button-text {
+  color: #333;
+}
+
+/* Primary action button */
+.primary-button {
+  height: 50px;
+  border-radius: 25px;
+}
+
+.primary-button .button-text {
+  font-size: 1.125rem;
+}
+
+/* Sparkle/magic button */
+.sparkle-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+/* Delete button variant */
+.delete-button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background-color: rgba(255, 80, 80, 0.15);
+  box-shadow: inset 0 2px 1px 0 rgba(255, 150, 150, 0.15), inset 0 -3px 2px 0 rgba(100, 0, 0, 0.5), 0 8px 15px
+    rgba(100, 0, 0, 0.3);
+}
+
+.delete-button .button-text {
+  color: rgba(255, 150, 150, 1);
+}
+
+.delete-button:hover {
+  background-color: rgba(255, 80, 80, 0.25);
+}
+
+.delete-button:hover .button-text {
+  color: #fff;
+}
+
+/* Enhanced bottom navigation with stronger glass refraction effect */
+.bottom-nav {
+  height: 80px;
+  border-radius: 40px 40px 0 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 16px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* Enhanced glass morphism for light refraction */
+  background: rgba(10, 19, 59, 0.4);
+  backdrop-filter: blur(32px) saturate(180%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%);
+  /* Add border for glass edge effect */
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  /* Enhanced shadow for depth */
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Added safe area utility class for iOS */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10px;
+}
+
+/* Collapsible section */
+.collapsible-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  cursor: pointer;
+}
+
+/* Image grid */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Shimmer loading effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+}
