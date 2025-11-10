@@ -260,7 +260,7 @@ function SettingsPage() {
       <h1 className="text-2xl font-bold text-white mb-6">Settings</h1>
 
       {/* Gemini API Key */}
-      <div className="glass-3d-surface rounded-2xl p-6">
+      <div className="glass-3d-surface rounded-3xl p-6">
         <h3 className="text-white font-medium mb-4">Gemini API Key</h3>
         <input
           type="password"
