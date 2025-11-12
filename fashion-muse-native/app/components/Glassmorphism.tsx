@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { View, StyleSheet, LayoutChangeEvent } from 'react-native';
 import { Canvas, RoundedRect, BackdropFilter, Blur, Saturate } from '@shopify/react-native-skia';

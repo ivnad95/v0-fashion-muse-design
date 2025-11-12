@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Pressable, Text, StyleSheet, ViewStyle } from 'react-native';
 import { Glassmorphism } from './Glassmorphism';

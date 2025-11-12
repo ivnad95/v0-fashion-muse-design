@@ -1,4 +1,3 @@
-
 import { Tabs } from 'expo-router';
 import { Home, Clock, Star } from 'lucide-react-native';
 import { Colors } from '../constants';
