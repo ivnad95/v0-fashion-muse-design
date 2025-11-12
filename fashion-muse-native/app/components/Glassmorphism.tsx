@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { View, StyleSheet, LayoutChangeEvent } from 'react-native';
-import { Canvas, RoundedRect, BackdropFilter, Blur } from '@shopify/react-native-skia';
+import { Canvas, RoundedRect, BackdropFilter, Blur, Saturate } from '@shopify/react-native-skia';
 import { Colors } from '../constants';
 
 interface GlassmorphismProps {
@@ -26,11 +26,12 @@ export const Glassmorphism: React.FC<GlassmorphismProps> = ({
     <View style={style} onLayout={onLayout}>
       {size.width > 0 && size.height > 0 && (
         <Canvas style={StyleSheet.absoluteFill}>
-          <RoundedRect x={0} y={0} width={size.width} height={size.height} r={borderRadius} color={Colors.glassBg} />
+          <RoundedRect x={0} y={0} width={size.width} height={size.height} r={borderRadius} color="rgba(255, 255, 255, 0.05)" />
           <BackdropFilter
-            filter={<Blur blur={20} />}
+            filter={<Blur blur={24} />}
             clip={{ x: 0, y: 0, width: size.width, height: size.height, r: borderRadius }}
           >
+            <Saturate amount={1.2} />
           </BackdropFilter>
           <RoundedRect
             x={0}
@@ -38,7 +39,7 @@ export const Glassmorphism: React.FC<GlassmorphismProps> = ({
             width={size.width}
             height={size.height}
             r={borderRadius}
-            color={Colors.glassBorder}
+            color="rgba(255, 255, 255, 0.08)"
             style="stroke"
             strokeWidth={1}
           />

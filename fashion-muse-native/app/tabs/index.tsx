@@ -1,22 +1,17 @@
 
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, StatusBar, Pressable, FlatList } from 'react-native';
-import { GlassButton, OptionButton } from '../components';
-import { Colors, Typography } from './constants';
+import { View, Text, StyleSheet, SafeAreaView, StatusBar, Pressable, Image } from 'react-native';
+import { Colors } from '../constants';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
-import { Camera } from 'lucide-react-native';
+import { Sparkles } from 'lucide-react-native';
+import { NumberChip } from '../components';
 
-const GENERATION_OPTIONS = [
-  { id: '1', title: 'Editorial' },
-  { id: '2', title: 'Street Style' },
-  { id: '3', title: 'Avant-Garde' },
-  { id: '4', title: 'Minimalist' },
-];
+const IMAGE_COUNT_OPTIONS = [1, 2, 4, 6, 8];
 
 export default function HomeScreen() {
   const router = useRouter();
-  const [selectedOption, setSelectedOption] = useState('1');
+  const [imageCount, setImageCount] = useState(4);
 
   const handleGenerate = () => {
     router.push('/tabs/results');
@@ -28,95 +23,114 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.screenContent}>
       <StatusBar barStyle="light-content" />
       <LinearGradient
         colors={[Colors.primaryDark, Colors.primaryBlue]}
         style={StyleSheet.absoluteFill}
       />
-      <View style={styles.header}>
-        <Text style={styles.title}>Fashion Muse Studio</Text>
-        <Text style={styles.subtitle}>AI-Powered Fashion Photography</Text>
-      </View>
-
-      <View style={styles.mainContent}>
-        <Pressable onPress={handleUpload} style={styles.uploadContainer}>
-          <Camera size={48} color={Colors.textSecondary} />
-          <Text style={styles.uploadText}>Tap to upload a photo</Text>
-        </Pressable>
-
-        <View style={styles.optionsContainer}>
-          <Text style={styles.optionsText}>Style</Text>
-          <FlatList
-            data={GENERATION_OPTIONS}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <OptionButton
-                title={item.title}
-                isSelected={selectedOption === item.id}
-                onPress={() => setSelectedOption(item.id)}
-              />
-            )}
-          />
+      <View style={styles.fixedHeader}>
+        <Text style={styles.headerText}>Good morning, Creator</Text>
+        <View style={styles.imageCountContainer}>
+          {IMAGE_COUNT_OPTIONS.map((count) => (
+            <NumberChip
+              key={count}
+              count={count}
+              isSelected={imageCount === count}
+              onPress={() => setImageCount(count)}
+            />
+          ))}
         </View>
       </View>
-
-      <GlassButton onPress={handleGenerate} title="Generate" />
+      <View style={styles.scrollableContent}>
+        <View style={styles.uploadArea}>
+          <Image source={{ uri: 'https://v0-fashion-app-clone.vercel.app/fashion-muse-logo.png' }} style={styles.logo} />
+          <Pressable onPress={handleUpload}>
+            <Text style={styles.uploadPrompt}>Tap to upload your photo</Text>
+            <Text style={styles.uploadSubtext}>Start your fashion transformation</Text>
+          </Pressable>
+        </View>
+        <Pressable style={styles.primaryButton} onPress={handleGenerate}>
+          <Sparkles size={20} color="white" />
+          <Text style={styles.primaryButtonText}>Generate Photoshoot</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  screenContent: {
     flex: 1,
-    alignItems: 'center',
+    backgroundColor: Colors.primaryDark,
+  },
+  fixedHeader: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 20,
   },
-  header: {
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: Typography['3xl'],
-    fontWeight: 'bold',
+  headerText: {
     color: Colors.textPrimary,
+    fontSize: 18,
   },
-  subtitle: {
-    fontSize: Typography.lg,
-    color: Colors.textSecondary,
-    marginTop: 8,
+  imageCountContainer: {
+    flexDirection: 'row',
+    gap: 8,
   },
-  mainContent: {
+  numberChip: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  activeNumberChip: {
+    backgroundColor: Colors.accentBlue,
+  },
+  buttonText: {
+    color: Colors.textPrimary,
+    fontWeight: '600',
+  },
+  scrollableContent: {
+    flex: 1,
+    padding: 20,
+  },
+  uploadArea: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
   },
-  uploadContainer: {
-    width: '100%',
-    height: 200,
-    borderWidth: 2,
-    borderColor: Colors.glassBorder,
-    borderStyle: 'dashed',
-    borderRadius: 20,
-    alignItems: 'center',
+  logo: {
+    width: 256,
+    height: 64,
+    resizeMode: 'contain',
+    marginBottom: 20,
+  },
+  uploadPrompt: {
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  uploadSubtext: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 4,
+  },
+  primaryButton: {
+    flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 30,
+    alignItems: 'center',
+    gap: 8,
+    backgroundColor: Colors.accentDarkBlue,
+    borderRadius: 25,
+    height: 50,
   },
-  uploadText: {
-    color: Colors.textSecondary,
-    fontSize: Typography.base,
-    marginTop: 8,
-  },
-  optionsContainer: {
-    width: '100%',
-    marginTop: 20,
-  },
-  optionsText: {
-    color: Colors.textPrimary,
-    fontSize: Typography.lg,
-    marginBottom: 10,
+  primaryButtonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '600',
   },
 });

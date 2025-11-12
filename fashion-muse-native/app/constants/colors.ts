@@ -1,3 +1,4 @@
+
 export const Colors = {
   primaryDark: '#0A133B',
   primaryBlue: '#002857',
@@ -6,7 +7,10 @@ export const Colors = {
   textPrimary: '#F5F7FA',
   textSecondary: '#C8CDD5',
   textMuted: '#8A92A0',
-  glassBg: 'rgba(255, 255, 255, 0.05)',
-  glassBorder: 'rgba(255, 255, 255, 0.1)',
-  glassShadow: 'rgba(0, 0, 0, 0.3)',
+  silverLight: '#f5f7fa',
+  silverMid: '#c8cdd5',
+  silverDark: '#8a92a0',
+  silverGlow: '#c8cdd566',
+  shadowColor: '#00000080',
+  glassBlur: '24px',
 };

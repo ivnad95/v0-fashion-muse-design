@@ -3,27 +3,34 @@ import React from 'react';
 import { Pressable, Text, StyleSheet, ViewStyle } from 'react-native';
 import { Glassmorphism } from './Glassmorphism';
 import { Colors, Typography } from '../constants';
+import { LinearGradient } from 'expo-linear-gradient';
+import { View } from 'react-native';
 
 interface GlassButtonProps {
   onPress: () => void;
   title: string;
   style?: ViewStyle;
+  children?: React.ReactNode;
 }
 
-export const GlassButton: React.FC<GlassButtonProps> = ({ onPress, title, style }) => {
+export const GlassButton: React.FC<GlassButtonProps> = ({ onPress, title, style, children }) => {
   return (
     <Pressable onPress={onPress}>
       {({ pressed }) => (
-        <Glassmorphism
+        <View
           style={[
             styles.button,
             style,
             pressed ? styles.buttonPressed : styles.buttonIdle,
           ]}
-          borderRadius={12}
         >
+          <LinearGradient
+            colors={['rgba(255, 255, 255, 0.15)', 'rgba(255, 255, 255, 0.03)']}
+            style={StyleSheet.absoluteFill}
+          />
+          {children}
           <Text style={styles.text}>{title}</Text>
-        </Glassmorphism>
+        </View>
       )}
     </Pressable>
   );
@@ -35,12 +42,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: Colors.glassShadow,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 16,
+    shadowColor: Colors.shadowColor,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 1,
+    shadowRadius: 15,
     elevation: 5,
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    overflow: 'hidden',
   },
   buttonIdle: {
     transform: [{ translateY: 0 }],
@@ -51,8 +61,11 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
   },
   text: {
-    color: Colors.textPrimary,
+    color: Colors.silverMid,
     fontSize: Typography.base,
     fontWeight: '600',
+    textShadowColor: Colors.shadowColor,
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
 });
